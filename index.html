@@ -55,7 +55,7 @@
         linear-gradient(rgba(10,10,14,.55), rgba(10,10,14,.65)),
         radial-gradient(1000px 600px at 70% 10%, #3a2d7d 0%, rgba(58,45,125,0) 60%),
         radial-gradient(1000px 600px at 0% 0%, #0e718e 0%, rgba(14,113,142,0) 60%),
-        url('IMG_9844.jpg');
+        url('https://github.com/munaaaden/dataandaiprojects/blob/main/IMG_9844.jpg?raw=1');
     background-size: cover; background-position: center; background-repeat: no-repeat;
     }
     .hero .inner{position:relative; z-index:1}
@@ -80,12 +80,10 @@
     .card p{margin:0; color:var(--muted)}
 
     /* About: portrait + intro block reminiscent of reference */
-    .about-wrap{display:grid; grid-template-columns: minmax(240px, 360px) 1fr; gap:28px; align-items:center}
-    .portrait{position:relative; width:100%; max-width:340px; aspect-ratio:1/1; margin:0; border-radius:50%; overflow:hidden; padding:6px; background:conic-gradient(from 180deg, rgba(255,45,120,.45), rgba(155,89,255,.45), rgba(34,211,238,.35), rgba(255,45,120,.45)); box-shadow:var(--shadow);} 
-    .portrait .frame{border-radius:50%; overflow:hidden; background:linear-gradient(135deg, #2a2b33, #1b1c23); height:100%; width:100%; display:grid; place-items:center}
+    .about-wrap{display:grid; grid-template-columns: 1fr 1fr; gap:36px; align-items:center}
+    .portrait{position:relative; width:clamp(360px, 80vw, 840px); max-width:840px; aspect-ratio:1/1; margin:10px 0; border-radius:20px; overflow:hidden; padding:10px; background:conic-gradient(from 180deg, rgba(255,45,120,.45), rgba(155,89,255,.45), rgba(34,211,238,.35), rgba(255,45,120,.45)); box-shadow:var(--shadow);}       
+    .portrait .frame{border-radius:20px; overflow:hidden; background:linear-gradient(135deg, #2a2b33, #1b1c23); height:100%; width:100%; display:grid; place-items:center; border:2px solid rgba(255,255,255,.95)}
     .portrait .frame span{opacity:.7}
-    .badge-years{position:absolute; left:12px; bottom:12px; background:var(--accent); color:#fff; font-weight:800; padding:10px 12px; border-radius:12px}
-
     /* Education items (dates removed) */
     .edu-list{display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(280px,1fr))}
     .edu-item{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:16px}
@@ -99,8 +97,13 @@
     footer{padding:38px 0 64px; color:#c7cad7; text-align:center; opacity:.85}
 
     @media (max-width: 860px){
-      .about-wrap{grid-template-columns:1fr}
+      .about-wrap{grid-template-columns:1fr; gap:20px}
+      .portrait{width:clamp(260px, 80vw, 360px); max-width:360px; margin:0 auto 18px}
     }
+      .portrait{max-width:260px; margin:0 auto 16px}
+    }
+}
+
 
     @media (prefers-reduced-motion:no-preference){
       a, .btn{transition:transform .2s ease, opacity .2s ease}
@@ -140,9 +143,8 @@
       <h2 class="section-title">About me</h2>
       <div class="about-wrap">
         <figure class="portrait">
-          <div class="frame"><img src="IMG_9844.jpg" alt="Muna Aden headshot" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-          <figcaption class="badge-years">7+ Years Experience</figcaption>
-        </figure>
+          <div class="frame"><img src="https://github.com/munaaaden/dataandaiprojects/blob/main/IMG_9844.jpg?raw=1" alt="Muna Aden headshot" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"/></div>
+          </figure>
         <div>
           <p class="lead">I am a public health practitioner with a proven track record of spearheading impactful initiatives, proactively identifying health needs, and translating data into action. My experience spans public health emergency operations, epidemiology and surveillance, advanced analytics (R, Python, QGIS, Power BI, STATA, DHIS2), and collaborative research. I contribute to outbreak intelligence, policy translation, and capacity building for Nairobi’s health ecosystem.</p>
           <div class="grid cols-3" style="margin-top:18px">
