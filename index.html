@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Muna Aden — Data Analysis & GitHub Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --page:#14151a;          /* base page color */
+      --panel:#1b1c23;         /* card/panel */
+      --accent:#ff2d78;        /* hot pink */
+      --accent-2:#9b59ff;      /* violet */
+      --text:#f4f5f7;          /* near-white */
+      --muted:#b6b8c3;         /* muted text */
+      --border:rgba(255,255,255,.08);
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --radius:20px;
+      --maxw:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 420px at 80% 0%, rgba(155,89,255,.20) 0%, transparent 60%),
+        radial-gradient(900px 420px at 5% -10%, rgba(23,162,184,.20) 0%, transparent 60%),
+        var(--page);
+      overflow-x:hidden;
+    }
+
+    /* Soft grain for depth */
+    body::before{content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 40 40"><defs><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .035 .07 .035 0"/></feComponentTransfer></filter></defs><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+      opacity:.3; mix-blend-mode:soft-light;}
+
+    .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+    header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(140%) blur(8px); background:rgba(20,21,26,.65); border-bottom:1px solid var(--border)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+    .brand::before{content:""; width:22px; height:22px; border-radius:7px; background:conic-gradient(from 180deg at 50% 50%, var(--accent), var(--accent-2), #22d3ee, var(--accent)); box-shadow:0 0 30px rgba(255,45,120,.35)}
+
+    nav a{color:var(--muted); text-decoration:none; margin-left:18px; font-weight:700; position:relative}
+    nav a:hover{color:var(--text)}
+    nav a::after{content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0; background:var(--accent); transition:width .2s ease}
+    nav a:hover::after{width:100%}
+
+    /* HERO inspired by reference (large intro + curved bottom) */
+    .hero{position:relative; padding:120px 0 90px; overflow:hidden;
+      background:
+        linear-gradient(rgba(10,10,14,.55), rgba(10,10,14,.65)),
+        radial-gradient(1000px 600px at 70% 10%, #3a2d7d 0%, rgba(58,45,125,0) 60%),
+        radial-gradient(1000px 600px at 0% 0%, #0e718e 0%, rgba(14,113,142,0) 60%),
+        url('IMG_9844.jpg');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    }
+    .hero .inner{position:relative; z-index:1}
+    .hero h1{font-size:clamp(36px, 6vw, 68px); line-height:1.02; margin:0 0 10px; font-weight:800}
+    .hero .intro{font-size:clamp(16px, 2.4vw, 20px); color:var(--muted); max-width:800px}
+    .hero .cta{display:flex; gap:14px; margin-top:28px}
+    .btn{padding:12px 18px; border-radius:14px; border:1px solid var(--border); text-decoration:none; color:var(--text); font-weight:800; display:inline-flex; align-items:center; gap:8px; box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(135deg, var(--accent), var(--accent-2)); border-color:transparent}
+    .hero::after{content:""; position:absolute; left:50%; bottom:-120px; transform:translateX(-50%); width:140%; height:240px; background:var(--page); border-radius:0 0 50% 50% / 0 0 100% 100%; box-shadow:0 -8px 40px rgba(0,0,0,.35) inset}
+
+    section{scroll-margin-top:90px; padding:42px 0}
+    .section-title{font-size:clamp(22px, 3.4vw, 30px); margin:0 0 12px; position:relative}
+    .section-title::after{content:""; display:block; width:64px; height:3px; background:var(--accent); border-radius:99px; margin-top:10px}
+    .lead{color:var(--muted); max-width:860px}
+
+    .grid{display:grid; gap:20px}
+    .grid.cols-3{grid-template-columns:repeat(auto-fit, minmax(240px,1fr))}
+    .grid.cols-2{grid-template-columns:repeat(auto-fit, minmax(280px,1fr))}
+
+    .card{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px}
+    .card p{margin:0; color:var(--muted)}
+
+    /* About: portrait + intro block reminiscent of reference */
+    .about-wrap{display:grid; grid-template-columns: minmax(240px, 360px) 1fr; gap:28px; align-items:center}
+    .portrait{position:relative; width:100%; max-width:340px; aspect-ratio:1/1; margin:0; border-radius:50%; overflow:hidden; padding:6px; background:conic-gradient(from 180deg, rgba(255,45,120,.45), rgba(155,89,255,.45), rgba(34,211,238,.35), rgba(255,45,120,.45)); box-shadow:var(--shadow);} 
+    .portrait .frame{border-radius:50%; overflow:hidden; background:linear-gradient(135deg, #2a2b33, #1b1c23); height:100%; width:100%; display:grid; place-items:center}
+    .portrait .frame span{opacity:.7}
+    .badge-years{position:absolute; left:12px; bottom:12px; background:var(--accent); color:#fff; font-weight:800; padding:10px 12px; border-radius:12px}
+
+    /* Education items (dates removed) */
+    .edu-list{display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(280px,1fr))}
+    .edu-item{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:16px}
+    .edu-item h3{margin:0 0 6px}
+    .edu-item p{margin:0; color:var(--muted)}
+
+    /* Projects */
+    .projects .card a{display:inline-block; margin-top:10px; font-weight:800; text-decoration:none; color:var(--accent);}
+    .projects .card a:hover{opacity:.9; text-decoration:underline}
+
+    footer{padding:38px 0 64px; color:#c7cad7; text-align:center; opacity:.85}
+
+    @media (max-width: 860px){
+      .about-wrap{grid-template-columns:1fr}
+    }
+
+    @media (prefers-reduced-motion:no-preference){
+      a, .btn{transition:transform .2s ease, opacity .2s ease}
+      .btn:hover{transform:translateY(-1px)}
+      .card{transition:transform .2s ease}
+      .card:hover{transform:translateY(-3px)}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Muna Aden</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero (inspired style) -->
+    <section class="hero" id="top">
+      <div class="container inner">
+        <h1>Hi, I’m <span style="color:var(--accent)">Muna</span></h1>
+        <p class="intro">Epidemiologist • Data Scientist • Rapid Responder — delivering data‑driven solutions across public health emergencies, epidemiology & surveillance, and research. Based in <strong>Nairobi City</strong>, Kenya.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects" aria-label="Skip to projects">Explore Projects</a>
+          <a class="btn" href="#publications" aria-label="Skip to publications">See Publications</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="container">
+      <h2 class="section-title">About me</h2>
+      <div class="about-wrap">
+        <figure class="portrait">
+          <div class="frame"><img src="IMG_9844.jpg" alt="Muna Aden headshot" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+          <figcaption class="badge-years">7+ Years Experience</figcaption>
+        </figure>
+        <div>
+          <p class="lead">I am a public health practitioner with a proven track record of spearheading impactful initiatives, proactively identifying health needs, and translating data into action. My experience spans public health emergency operations, epidemiology and surveillance, advanced analytics (R, Python, QGIS, Power BI, STATA, DHIS2), and collaborative research. I contribute to outbreak intelligence, policy translation, and capacity building for Nairobi’s health ecosystem.</p>
+          <div class="grid cols-3" style="margin-top:18px">
+            <div class="card">
+              <h3>Focus Areas</h3>
+              <p>Emergency preparedness & response, epidemic intelligence, surveillance design, geospatial analytics, and health data governance.</p>
+            </div>
+            <div class="card">
+              <h3>Toolbox</h3>
+              <p>R, Python, STATA, QGIS, DHIS2, Power BI, SQL, Git/GitHub. Comfortable with routine, quantitative, and spatial datasets.</p>
+            </div>
+            <div class="card">
+              <h3>Languages</h3>
+              <p>English, Kiswahili, Arabic, Somali.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education (dates removed, as requested) -->
+    <section id="education" class="container">
+      <h2 class="section-title">My education</h2>
+      <div class="edu-list">
+        <div class="edu-item">
+          <h3>MSc — Control of Infectious Diseases</h3>
+          <p>London School of Hygiene & Tropical Medicine</p>
+        </div>
+        <div class="edu-item">
+          <h3>GCSRT — Advanced Epidemiology, Data Analysis & Clinical Trials</h3>
+          <p>Harvard Medical School</p>
+        </div>
+        <div class="edu-item">
+          <h3>Modelling in Infectious Disease Control</h3>
+          <p>Imperial College London</p>
+        </div>
+        <div class="edu-item">
+          <h3>US CDC Fellowship — Public Health Emergency Management</h3>
+          <p>Roybal Campus, Atlanta</p>
+        </div>
+        <div class="edu-item">
+          <h3>MBChB — Bachelor of Medicine & Surgery</h3>
+          <p>University of Nairobi</p>
+        </div>
+        <div class="edu-item">
+          <h3>GIBATCH Fellowship</h3>
+          <p>Surveillance, Biosafety, Biosecurity & IHR — BNITM, AFENET, Swiss TPH, RKI</p>
+        </div>
+        <div class="edu-item">
+          <h3>Advanced Data Analysis — Technology</h3>
+          <p>The Global Health Network</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="container projects">
+      <h2 class="section-title">My GitHub projects</h2>
+      <p class="lead">Selected interactive dashboards & modelling explorations. Each card links to a live GitHub Pages build.</p>
+      <div class="grid cols-3" style="margin-top:14px">
+        <article class="card">
+          <h3>Cholera WASH Indicators Dashboard</h3>
+          <p>Interactive dashboard exploring WASH indicators for cholera preparedness and response.</p>
+          <a href="https://munaaaden.github.io/Cholera_WASH_Indicators_Dashboard/" target="_blank" rel="noopener">Open project →</a>
+        </article>
+        <article class="card">
+          <h3>Gapminder Dashboard</h3>
+          <p>Data storytelling with global health indicators — filtering, comparisons, and trends.</p>
+          <a href="https://munaaaden.github.io/gapminder_dashboard/" target="_blank" rel="noopener">Open project →</a>
+        </article>
+        <article class="card">
+          <h3>Ebola Modelling Dash</h3>
+          <p>SEIR‑style modelling playground to visualize outbreak dynamics and policy scenarios.</p>
+          <a href="https://munaaaden.github.io/Ebola_Modelling_Dash/" target="_blank" rel="noopener">Open project →</a>
+        </article>
+        <article class="card">
+          <h3>AI Portfolio (Course)</h3>
+          <p>Showcase of generative AI assignments and research mini‑projects.</p>
+          <a href="https://munaaaden.github.io/muna_ai_portfolio/#about-course" target="_blank" rel="noopener">Open project →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="publications" class="container">
+      <h2 class="section-title">My publications</h2>
+      <div class="grid cols-2" style="margin-top:6px">
+        <div class="card">
+          <h3><em>AI‑based Clinical Decision Support for Primary Care: A Real‑World Study</em></h3>
+          <p>Clinical AI deployment and evaluation in primary care settings.</p>
+        </div>
+        <div class="card">
+          <h3><em>Mind the Gap: Evaluating the Representativeness of Quantitative Medical Language Reasoning LLM Benchmarks for African Disease Burdens</em></h3>
+          <p>Benchmarking considerations for LLMs in African health contexts.</p>
+        </div>
+        <div class="card">
+          <h3><em>Building Local Capacity for Emergency Preparedness and Response Coordination</em></h3>
+          <p>Establishment of subnational PHEOCs during the COVID‑19 pandemic — Kenya, 2020–2023.</p>
+        </div>
+        <div class="card">
+          <h3><em>Enablers & Barriers of ART Uptake among Young Adolescents in Nairobi, Kenya</em></h3>
+          <p>Qualitative insights to improve adolescent HIV care and treatment adherence.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Muna Aden • Portfolio — Built without frameworks • Nairobi City, Kenya</small>
+    </div>
+  </footer>
+
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id=a.getAttribute('href');
+        if(id && id.length>1){
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
